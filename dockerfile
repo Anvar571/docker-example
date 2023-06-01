@@ -1,3 +1,5 @@
+# from orqali base image yoziladi
+# shuni ustiga image quramiz
 FROM node:15
 
 WORKDIR /app

@@ -69,7 +69,11 @@ docker system df
 
 ====================================================================
                 BUILD IMAGE
-`
+-- image qurush uchun dockerfile kerak bo'ladi
+-- docker image qurish
+docket image build -t my_first_image:v1.0.0 path(.(current_path))
+
+docker container run -itd -p 3000:300 my_image:v1.0.0
 
 ====================================================================
 -- (imagelar ro'yxati)
