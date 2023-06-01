@@ -1,54 +1,130 @@
-docker image ls (imagelar ro'yxati)
 
-docker container ls (containerlar ro'yxati)
 
-yangi image yaratish
+=====================================================
+                DOCKER CONTAINER
+
+-- IMAGE bu tayyor dastur
+-- CONTAINER bu ishlab turgan image hisoblanadi
+-- IMAGE esa code va docker fayllarning birlashmasi
+-- ishga tushgan image container deyiladi
+
+-- ishlab turgan containerlarni ko'rish
+docker ps yoki container ls
+
+--barcha containerlar ro'yxatini ko'rish
+docker ps -a
+
+--containerni ishga tushurish
+docker container run image_name
+
+-- va biz biror containerni ishga tushurmoqchimiz va uni ichiga kirmoqchi bo'lsak
+docker container run -it image_name sh(bash)
+
+-- biror bor containerni ishga tushurish uchun
+docker container start container_name
+
+-- va ishlab turgan containerga ulanish uchun esa
+docker container attach container_name
+
+-- ishlayotgan containerni to'xtatish
+docker container stop(kill) container_name
+
+-- mavjud containerlarni o'xhirish
+docker container rm container_name
+
+-- mavjud hamma containerlarni o'chirish 
+docker container rm prune
+
+-- vaqtinchalik container ishlatmoqchi bo'lsak
+docker container run --rm -it image_name sh (ctrl + p + q) ishlagan holatda chiqish containerdan
+
+-- o'zimiz nom bersak ham bo'ladi containerga
+docker container rum --rm -it --name=ourname image_name sh(optional)
+
+-- containerni ishga tushurib yuborish lekin uni ischiga kirmaymiz orqa fonda ishlab turadi
+docket container rum --rm -itd --name=myname image_name shularni
+
+-- containerga yana boshqa yo'l bilan ham kirish mumkin
+docker container exac -it (ishlab turgan container_name) sh(bash)
+
+===================================================================
+            DOCKER IMAGE
+-- mavjud imagelarni ko'rish
+docker image ls
+
+-- docker hubdan image yuklab olish
+docker image pull image_name:tag_name
+
+-- imageni o'chirish
+docker image rm image:tag
+
+-- ishlab turgan image o'chirish
+docker image -f rm image:tag
+
+-- barcha ishlamayotgan imagelarni o'chirish
+docker image prune
+
+-- barcha imagelar hajmini ko'rish
+docker system df
+
+====================================================================
+                BUILD IMAGE
+`
+
+====================================================================
+-- (imagelar ro'yxati)
+docker image ls
+
+-- (containerlar ro'yxati)
+docker container ls 
+
+-- yangi image yaratish
 docker build -t image_name .
 
-kompyuter bilan docker imageni bog'lab biror portda ishga tushurish 
-bu yerda kampyuterdan biror port dockerda biror port ajratilishi kerak va ikkalasi birlashtiriladi
+-- kompyuter bilan docker imageni bog'lab biror portda ishga tushurish 
+-- bu yerda kampyuterdan biror port dockerda biror port ajratilishi kerak va ikkalasi birlashtiriladi
 docker run -v $(cwd):/app -p 3000:3000 -d --name node-app node-app-image
 
-ishlab turgan imageni o'chirish
+-- ishlab turgan imageni o'chirish
 docker rm node-app -f 
 
-ishlab turgan containerlar
+-- ishlab turgan containerlar
 docker ps 
 
-ishlab turgan containerlar barchasi
+-- ishlab turgan containerlar barchasi
 docker ps -a 
 
-ishlab turgan imageni xatoliklarini ko'rish
+-- ishlab turgan imageni xatoliklarini ko'rish
 docker logs image_name
 
-docker image ichiga kirish
+-- docker image ichiga kirish
 docker exec -it image_name bash
 
-buni faqat readonly qilib qo'yadi va o'zgarmaydigan fayllar
+-- buni faqat readonly qilib qo'yadi va o'zgarmaydigan fayllar
 docker run -v $(cwd):/app:ro -v /app/node_modules -p 3000:3000 -d --name node-app node-app-image
 
-yana bir muammo bir nechta service bo'lsa ularni boshqarish juda murakkab bo'ladi clida
+-- yana bir muammo bir nechta service bo'lsa ularni boshqarish juda murakkab bo'ladi clida
 shuning uchun docker-compose filedan foydalanamiz
 
-buni ishga tushurish uchun
+-- buni ishga tushurish uchun
 docker-compose up -d
 
 docker-compose up -d --build
 
-commanalarni ko'rish
+-- commanalarni ko'rish
 docker-compose up --help
 
-o'chirib tashlaydi
+-- o'chirib tashlaydi
 docker-compose down -v
 
-bizda yana muammo bo'lishi mumkin ishlab turgan imagelarni o'chirish edan chiqadi 
-shularni birdaniga ishlagandan kiyin o'zi o'chib ketadigan kod bor
+-- bizda yana muammo bo'lishi mumkin ishlab turgan imagelarni o'chirish edan chiqadi 
+-- shularni birdaniga ishlagandan kiyin o'zi o'chib ketadigan kod bor
 
 
-bir nechta docker-compose fayllarni ishga tushurish uchun
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+-- bir nechta docker-compose fayllarni ishga tushurish uchun
+-- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-dev envni o'chirib prodni yoqish
+-- dev envni o'chirib prodni yoqish
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 

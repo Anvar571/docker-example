@@ -11,6 +11,7 @@ RUN npm install
 
 COPY . ./
 
+
 EXPOSE 3000
 
 # node bu production holatda qo'ysa bo'ladi
