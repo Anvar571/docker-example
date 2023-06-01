@@ -1,0 +1,54 @@
+docker image ls (imagelar ro'yxati)
+
+docker container ls (containerlar ro'yxati)
+
+yangi image yaratish
+docker build -t image_name .
+
+kompyuter bilan docker imageni bog'lab biror portda ishga tushurish 
+bu yerda kampyuterdan biror port dockerda biror port ajratilishi kerak va ikkalasi birlashtiriladi
+docker run -v $(cwd):/app -p 3000:3000 -d --name node-app node-app-image
+
+ishlab turgan imageni o'chirish
+docker rm node-app -f 
+
+ishlab turgan containerlar
+docker ps 
+
+ishlab turgan containerlar barchasi
+docker ps -a 
+
+ishlab turgan imageni xatoliklarini ko'rish
+docker logs image_name
+
+docker image ichiga kirish
+docker exec -it image_name bash
+
+buni faqat readonly qilib qo'yadi va o'zgarmaydigan fayllar
+docker run -v $(cwd):/app:ro -v /app/node_modules -p 3000:3000 -d --name node-app node-app-image
+
+yana bir muammo bir nechta service bo'lsa ularni boshqarish juda murakkab bo'ladi clida
+shuning uchun docker-compose filedan foydalanamiz
+
+buni ishga tushurish uchun
+docker-compose up -d
+
+docker-compose up -d --build
+
+commanalarni ko'rish
+docker-compose up --help
+
+o'chirib tashlaydi
+docker-compose down -v
+
+bizda yana muammo bo'lishi mumkin ishlab turgan imagelarni o'chirish edan chiqadi 
+shularni birdaniga ishlagandan kiyin o'zi o'chib ketadigan kod bor
+
+
+bir nechta docker-compose fayllarni ishga tushurish uchun
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+dev envni o'chirib prodni yoqish
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
