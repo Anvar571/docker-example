@@ -52,6 +52,9 @@ docker container exac -it (ishlab turgan container_name) sh(bash)
 -- mavjud imagelarni ko'rish
 docker image ls
 
+-- image qurish
+docker build -it image_name path_to_dockerfile
+
 -- docker hubdan image yuklab olish
 docker image pull image_name:tag_name
 
